@@ -1,0 +1,6 @@
+pwntools
+ROPGadget
+capstone
+filebytes
+keystone-engine
+ropper
