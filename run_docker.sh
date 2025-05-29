@@ -18,5 +18,5 @@ docker run --rm --privileged --init -it \
 	-e DISPLAY=$DISPLAY \
 	-v /tmp/.X11-unix:/tmp/.X11-unix \
 	-v "$1":/root/git_repos \
-	ropemporium_playground:0.1 \
+	ropemporium_playground:0.2 \
 	terminator

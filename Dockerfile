@@ -1,18 +1,20 @@
-FROM ubuntu:24.10
+FROM ubuntu:24.04
 
 RUN apt update
 
-RUN apt install vim git gdb gcc make python3 python3-pip \
+RUN apt install -y vim git gdb gcc make python3 python3-pip \
     terminator qemu-user gdb-multiarch checksec ltrace \
-    ninja-build meson unzip pkg-config -y
+    ninja-build meson unzip pkg-config
 # x86
 RUN apt install libc6-i386 -y
 # ARM
-RUN apt install libc6-armel-cross binutils-arm-linux-gnueabi -y
+RUN apt install -y libc6-armel-cross libc6-armhf-cross \
+    binutils-arm-linux-gnueabi
 RUN mkdir /etc/qemu-binfmt && \
-    ln -s /usr/arm-linux-gnueabi /etc/qemu-binfmt/arm
+    ln -s /usr/arm-linux-gnueabi /etc/qemu-binfmt/arm && \
+    ln -s /usr/arm-linux-gnueabihf /etc/qemu-binfmt/armhf
 # MIPS
-RUN apt install libc6-mipsel-cross -y
+RUN apt install -y libc6-mipsel-cross
 RUN ln -s /usr/mipsel-linux-gnu /etc/qemu-binfmt/mipsel
 
 WORKDIR /tmp
